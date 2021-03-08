@@ -19,12 +19,13 @@ class UserRecipeDetails extends React.Component{
         const recipeId = this.props.match.params.id;
         getRecipe(recipeId).then((response) => {
             this.setState({
-                id: response.data.id,
+                id: response.data._id,
                 name: response.data.name,
                 directions: response.data.directions,
                 imageUrl: response.data.imageUrl,
                 ingredients: response.data.ingredients,
-                notes: response.data.preparation_time,
+                preparation_time: response.data.preparation_time,
+               notes: response.data.notes,
                 cook_time: response.data.cook_time,
                 loadedFromDb: true
             })
@@ -38,17 +39,17 @@ class UserRecipeDetails extends React.Component{
     }
 
     render() {
-        const { loadedFromDb, id ,name, directions, imageUrl, ingredients, notes, preparation_time, cook_time } = this.state;
+        const { loadedFromDb, id, name, directions, imageUrl, ingredients, notes, preparation_time, cook_time } = this.state;
         return loadedFromDb ? (
             <>
                 <h1>{name}</h1>
-                <img src={imageUrl}/>
+                <img src={imageUrl} alt='meal'/>
                 <p>Directions: {directions}</p>
                 <strong>Ingredients: </strong>
                 <ul>
-                    {ingredients.map((ingredient) => {
+                    {ingredients.map((ingredient, index) => {
                             return (
-                                <li key={ingredient.id}>
+                                <li key={index}>
                                     {ingredient}
                                 </li>
                             )
@@ -58,6 +59,7 @@ class UserRecipeDetails extends React.Component{
                 <p>Notes: {notes}</p>
                 <p>Preparation Time: {preparation_time}</p>
                 <p>Cook Time: {cook_time}</p>
+                <button onClick={() =>{this.props.history.push(`/recipes/${id}/edit`)}}>Edit Project</button>
                 <Link to='/user/profile'>Back</Link>
             </>
         ) : 
