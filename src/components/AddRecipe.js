@@ -2,84 +2,69 @@ import React from 'react';
 import { addRecipe, uploadFile } from '../api';
 import { toast } from 'react-toastify';
 
-class AddRecipe extends React.Component{
-    state = {
-        name: '',
-        directions: '',
-        imageUrl: '',
-        ingredients: '',
-        notes: '',
-        preparation_time: '',
-        cook_time:''
+function AddRecipe ({history}){
+    const nameRef = React.useRef();
+    const directionsRef = React.useRef();
+    const ingredientsRef = React.useRef();
+    const notesRef = React.useRef();
+    const preparation_timeRef = React.useRef();
+    const cook_timeRef = React.useRef();
+    const [imageUrl, setImageUrl] = React.useState();
+
+    const handleFileChange = (event) =>{
+        setImageUrl(event.target.files[0])
     }
 
-
-    handleChange = (event) => {
-        let { name, value } = event.target;
-        this.setState({
-            [name]:value
-        })
-    }
-
-    handleFormSubmit = (event) => {
+    const handleFormSubmit = (event) => {
         event.preventDefault();
-        const { name, directions, imageUrl, ingredients, notes, preparation_time, cook_time } = this.state;
         const uploadData = new FormData();
         uploadData.append('file', imageUrl);
 
         uploadFile(uploadData).then((response) => {
+            
             const newRecipe = {
-                name: name,
-                directions: directions,
-                ingredients: ingredients,
+                name: nameRef.current.value,
+                directions: directionsRef.current.value,
+                ingredients: ingredientsRef.current.value,
                 imageUrl:response.data.fileUrl,
-                notes: notes,
-                preparation_time: preparation_time,
-                cook_time: cook_time
+                notes: notesRef.current.value,
+                preparation_time: preparation_timeRef.current.value,
+                cook_time: cook_timeRef.current.value
             }
 
             addRecipe(newRecipe).then(() => {
                 toast.success('Recipe created!');
-                this.props.history.push('/user/profile')
+                history.push('/user/profile')
             }).catch(err => console.log(err))
         })
     }
 
-    handleFileChange = (event) => {
-        this.setState({
-            imageUrl: event.target.files[0]
-        });
-    }
+    return (
+        <form onSubmit={handleFormSubmit} encType='multipart/form-data'>
+            <label>name</label>
+            <input type='text' ref={nameRef}  />
 
-    render() {
-        const { name, directions, ingredients, notes, preparation_time, cook_time } = this.state;
-        return (
-            <form onSubmit={this.handleFormSubmit} encType='multipart/form-data'>
-                <label>name</label>
-                <input type='text' name='name' value={name} onChange={this.handleChange} />
+            <label>Directions</label>
+            <input type='text' ref={directionsRef}  />
 
-                <label>Directions</label>
-                <input type='text' name='directions' value={directions} onChange={this.handleChange} />
+            <label>Ingredients</label>
+            <input type='text' ref={ingredientsRef}  />
 
-                <label>Ingredients</label>
-                <input type='text' name='ingredients' value={ingredients} onChange={this.handleChange} />
+            <label>notes</label>
+            <input type='text' ref={notesRef}  />
 
-                <label>notes</label>
-                <input type='text' name='notes' value={notes} onChange={this.handleChange} />
+            <label>Preparation Time</label>
+            <input type='text' ref={preparation_timeRef}  />
 
-                <label>Preparation Time</label>
-                <input type='text' name='preparation_time' value={preparation_time} onChange={this.handleChange} />
-
-                <label>Cook Time</label>
-                <input type='text' name='cook_time' value={cook_time} onChange={this.handleChange} />
-                
-                <label>Image</label>
-                <input type='file' onChange={this.handleFileChange} />
-                
-                <button type='submit'>Create</button>
-            </form>
-        )
-    }
+            <label>Cook Time</label>
+            <input type='text' ref={cook_timeRef} />
+            
+            <label>Image</label>
+            <input type='file' onChange={handleFileChange} />
+            
+            <button type='submit'>Create</button>
+        </form>
+    )
 }
 
 export default AddRecipe;

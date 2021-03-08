@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { deleteRecipe, getRecipe } from '../api';
 
-class UserRecipeDetails extends React.Component{
-    state = {
+function UserRecipeDetails({match, history}){
+    const [recipe, setRecipe] = React.useState({
         id: '',
         name: '',
         directions: '',
@@ -11,43 +11,32 @@ class UserRecipeDetails extends React.Component{
         ingredients: '',
         notes: '',
         preparation_time: '',
-        cook_time: '',
-        loadedFromDb: false
-    }
+        cook_time: ''
+    })
+    const [loaded, setLoaded] = React.useState(false)
 
-    componentDidMount() {
-        const recipeId = this.props.match.params.id;
+    React.useEffect(() => {
+        const recipeId = match.params.id;
         getRecipe(recipeId).then((response) => {
-            this.setState({
-                id: response.data._id,
-                name: response.data.name,
-                directions: response.data.directions,
-                imageUrl: response.data.imageUrl,
-                ingredients: response.data.ingredients,
-                preparation_time: response.data.preparation_time,
-               notes: response.data.notes,
-                cook_time: response.data.cook_time,
-                loadedFromDb: true
-            })
+            setRecipe(response.data)
+            setLoaded(true)
         })
-    }
+    }, [match.params.id])
 
-    handleDeleteProject = (id) => {
+    const handleDeleteRecipe = (id) => {
         deleteRecipe(id).then(() => {
-            this.props.history.push('/user/profile');
+            history.push('/');
         });
     }
 
-    render() {
-        const { loadedFromDb, id, name, directions, imageUrl, ingredients, notes, preparation_time, cook_time } = this.state;
-        return loadedFromDb ? (
+        return loaded ? (
             <>
-                <h1>{name}</h1>
-                <img src={imageUrl} alt='meal'/>
-                <p>Directions: {directions}</p>
+                <h1>{recipe.name}</h1>
+                <img src={recipe.imageUrl} alt='meal'/>
+                <p>Directions: {recipe.directions}</p>
                 <strong>Ingredients: </strong>
                 <ul>
-                    {ingredients.map((ingredient, index) => {
+                    {recipe.ingredients.map((ingredient, index) => {
                             return (
                                 <li key={index}>
                                     {ingredient}
@@ -56,15 +45,14 @@ class UserRecipeDetails extends React.Component{
                         })
                     }
                 </ul>
-                <p>Notes: {notes}</p>
-                <p>Preparation Time: {preparation_time}</p>
-                <p>Cook Time: {cook_time}</p>
-                <button onClick={() =>{this.props.history.push(`/recipes/${id}/edit`)}}>Edit Project</button>
+                <p>Notes: {recipe.notes}</p>
+                <p>Preparation Time: {recipe.preparation_time}</p>
+                <p>Cook Time: {recipe.cook_time}</p>
+                <button onClick={() =>{history.push(`/recipes/${recipe._id}/edit`)}}>Edit Project</button>
                 <Link to='/user/profile'>Back</Link>
             </>
         ) : 
             <p>Loading</p>
-    }
 }
 
 export default UserRecipeDetails;

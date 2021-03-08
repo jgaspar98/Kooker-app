@@ -1,85 +1,82 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 import { getRecipe, updateRecipe } from '../api';
 
-class EditRecipe extends React.Component{
-    state = {
-        id: '',
-        name: '',
-        directions: '',
-        imageUrl: '',
-        ingredients: '',
-        notes: '',
-        preparation_time: '',
-        cook_time:''
-    }
+function EditRecipe ({match, history}){
+    const idRef = React.useRef();
+    const nameRef = React.useRef();
+    const directionsRef = React.useRef();
+    const ingredientsRef = React.useRef();
+    const notesRef = React.useRef();
+    const preparation_timeRef = React.useRef();
+    const cook_timeRef = React.useRef();
+    const [imageUrl, setImageUrl] = React.useState();
     
-    componentDidMount() {
-        const recipeId = this.props.match.params.id;
+    React.useEffect(() =>{
+        const recipeId = match.params.id;
         getRecipe(recipeId).then((response) => {
-            this.setState({
-                id: response.data._id,
-                name: response.data.name,
-                directions: response.data.directions,
-                imageUrl: response.data.imageUrl,
-                ingredients: response.data.ingredients,
-                notes: response.data.notes,
-                cook_time: response.data.cook_time,
-                preparation_time: response.data.preparation_time,
-                loadedFromDb: true
-            })
+         //   idRef.current.value = response.data._id;
+            nameRef.current.value = response.data.name;
+            directionsRef.current.value = response.data.directions;
+            setImageUrl(response.data.imageUrl);
+            ingredientsRef.current.value = response.data.ingredients;
+            notesRef.current.value = response.data.notes;
+            cook_timeRef.current.value = response.data.cook_time;
+            preparation_timeRef.current.value = response.data.preparation_time    
         })
-    }
+    },[match.params.id])
 
-    handleChange = (event) => {
-        let { name, value } = event.target;
-        this.setState({
-            [name]:value
-        })
-    }
 
-    handleFormSubmit = (event) => {
+    const handleFormSubmit = (event) => {
         event.preventDefault();
-        const { id } = this.state;
-        updateRecipe(this.state).then(() => {
-            this.props.history.push(`/recipes/${id}`)
+        const recipeId = match.params.id;
+        const newRecipe = {
+            id: recipeId,
+            imageUrl: imageUrl,
+            name: nameRef.current.value,
+            directions: directionsRef.current.value,
+            ingredients: ingredientsRef.current.value,
+            notes: notesRef.current.value,
+            preparation_time: preparation_timeRef.current.value,
+            cook_time: cook_timeRef.current.value
+        }
+        updateRecipe(newRecipe).then(() => {
+            toast.success('Recipe updated!')
+            history.push(`/recipes/${recipeId}`)
         }).catch(err => console.log(err))
     }
 
-    handleFileChange = (event) => {
-        this.setState({
-            imageUrl: event.target.files[0]
-        });
+    const handleFileChange = (event) =>{
+        setImageUrl(event.target.files[0])
     }
 
-    render() {
-        const { name, directions, ingredients, notes, preparation_time, cook_time } = this.state;
-        return (
-            <form onSubmit={this.handleFormSubmit}>
-                <label>Name</label>
-                <input type='text' name='name' value={name} onChange={this.handleChange} />
+    return (
+        <form onSubmit={handleFormSubmit}>
+            <label>Name</label>
+            <input type='text' ref={nameRef} />
 
-                <label>Directions</label>
-                <input type='text' name='directions' value={directions} onChange={this.handleChange} />
+            <label>Directions</label>
+            <input type='text' ref={directionsRef} />
 
-                <label>Ingredients</label>
-                <input type='text' name='ingredients' value={ingredients} onChange={this.handleChange} />
+            <label>Ingredients</label>
+            <input type='text' ref={ingredientsRef} />
 
-                <label>notes</label>
-                <input type='text' name='notes' value={notes} onChange={this.handleChange} />
+            <label>notes</label>
+            <input type='text' ref={notesRef} />
 
-                <label>Preparation Time</label>
-                <input type='text' name='preparation_time' value={preparation_time} onChange={this.handleChange} />
+            <label>Preparation Time</label>
+            <input type='text' ref={preparation_timeRef} />
 
-                <label>Cook Time</label>
-                <input type='text' name='cook_time' value={cook_time} onChange={this.handleChange} />
-                
-                <label>Image</label>
-                <input type='file' onChange={this.handleFileChange} />
-                
-                <button type='submit'>Update</button>
-            </form>
-        )
-    }
+            <label>Cook Time</label>
+            <input type='text' ref={cook_timeRef} />
+            
+            <label>Image</label>
+            <input type='file' onChange={handleFileChange} />
+            
+            <button type='submit'>Update</button>
+        </form>
+    )
+
 }
 
 export default EditRecipe

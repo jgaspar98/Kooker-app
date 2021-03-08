@@ -1,6 +1,7 @@
 import React from 'react';
 import { deleteRecipe, getAllRecipes } from '../api';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function UserRecipes() {
     const [userRecipes, setUserRecipes] = React.useState([]);
@@ -13,6 +14,7 @@ function UserRecipes() {
         
     const handleDeleteRecipe = (id) => {
         deleteRecipe(id).then(() => {
+            toast.error('Recipe Deleted!')
             getAllRecipes().then((response) => {
                 setUserRecipes(response.data)
             })

@@ -1,3 +1,4 @@
+//Connect to the API
 import axios from 'axios';
 const baseURL = `${process.env.REACT_APP_PROJECTS_API}/api`;
 
@@ -17,8 +18,8 @@ export const deleteRecipe = (id) => {
     return axios.delete(`${baseURL}/recipes/${id}`);
 }
 
-export const updateRecipe = (updateProject) => {
-    return axios.put(`${baseURL}/recipes/${ updateProject.id }`, updateProject);
+export const updateRecipe = (updateRecipe) => {
+    return axios.put(`${baseURL}/recipes/${updateRecipe.id}`, updateRecipe);
 }
 
 export const uploadFile = (uploadData) => {
