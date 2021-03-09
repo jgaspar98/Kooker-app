@@ -1,5 +1,5 @@
 import React from 'react';
-import { deleteRecipe, getAllRecipes } from '../api';
+import { deleteRecipe, getAllRecipes, getAllRecipesForUser } from '../api';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -7,7 +7,7 @@ function UserRecipes() {
     const [userRecipes, setUserRecipes] = React.useState([]);
 
     React.useEffect(() => {
-        getAllRecipes().then((response) => {
+        getAllRecipesForUser().then((response) => {
             setUserRecipes(response.data) 
         })
     },[])

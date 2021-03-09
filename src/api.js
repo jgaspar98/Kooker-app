@@ -6,12 +6,16 @@ export const getAllRecipes = () => {
     return axios.get(`${baseURL}/recipes`);
 };
 
+export const getAllRecipesForUser = () => {
+    return axios.get(`${baseURL}/user/recipes`, {withCredentials: true});
+};
+
 export const getRecipe = (id) => {
     return axios.get(`${baseURL}/recipes/${id}`);
 };
 
 export const addRecipe = (recipe) => {
-    return axios.post(`${baseURL}/recipes`, recipe);
+    return axios.post(`${baseURL}/recipes`, recipe, {withCredentials: true});
 }
 
 export const deleteRecipe = (id) => {

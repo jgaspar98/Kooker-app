@@ -1,0 +1,31 @@
+.nav{
+    background-color: rgb(80, 220, 213 , 0.3)  ;
+    height: 4rem;
+}
+
+.nav-item{
+    font-size: 20px;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.nav-link{
+    color: black;
+    opacity: 100;
+}
+
+.Wellcome{
+    background-color: rgb(215, 211, 121, 0.4);
+    width: 70%;
+    font-size: 5rem;
+    margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    text-align: center;
+    border:.25rem solid
+}
+
+.navbar-brand{
+    margin-right:72% !important;
+}

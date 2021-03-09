@@ -1,19 +1,6 @@
-.App {
-  text-align: center;
-  background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwallpaperaccess.com%2Fingredients&psig=AOvVaw22epaADTg9LkEplNfI9MQO&ust=1615300541621000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCOj3scz1oO8CFQAAAAAdAAAAABAD');
+Body{
+  background-image: url('salad2.jpg');
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -36,4 +23,16 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.search {
+  width: 70vw;
+  float:left;
+  height: 900px;
+  overflow:scroll;
+}
+
+.logo{
+ float: right;
+ margin-top: 5rem;
 }

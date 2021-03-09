@@ -2,7 +2,7 @@ import React from 'react';
 import { addRecipe, uploadFile } from '../api';
 import { toast } from 'react-toastify';
 
-function AddRecipe ({history}){
+function AddRecipe({ loggedInUser, history }) {
     const nameRef = React.useRef();
     const directionsRef = React.useRef();
     const ingredientsRef = React.useRef();
@@ -23,6 +23,7 @@ function AddRecipe ({history}){
         uploadFile(uploadData).then((response) => {
             
             const newRecipe = {
+                
                 name: nameRef.current.value,
                 directions: directionsRef.current.value,
                 ingredients: ingredientsRef.current.value,

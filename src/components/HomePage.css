@@ -1,0 +1,20 @@
+.Intro_Logo{
+    text-align: center;
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
+
+.Main-Logo{
+    border-radius: 80%;
+    width: 25rem;
+}
+
+.phrase{
+    color: #273B7A;
+    text-align: center;
+    text-shadow: 2px 2px #D7D379;
+    background-color: #D7D379;
+    margin-top: 1rem;
+    box-shadow: 5px 10px #5dd4dd;
+}
