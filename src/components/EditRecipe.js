@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 import { getRecipe, updateRecipe } from '../api';
 
 function EditRecipe ({match, history}){
-    const idRef = React.useRef();
     const nameRef = React.useRef();
     const directionsRef = React.useRef();
     const ingredientsRef = React.useRef();

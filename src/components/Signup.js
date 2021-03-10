@@ -6,7 +6,7 @@ function Signup({setCurrentUser, history}) {
     const username = React.useRef();
     const password = React.useRef();
 
-    const handleFormSubmit = (event) => {
+    const signupFormSubmit = (event) => {
         event.preventDefault();
         signup(username.current.value, password.current.value).then((response) => {
             setCurrentUser(response.data);
@@ -16,7 +16,7 @@ function Signup({setCurrentUser, history}) {
 
     return (
         <div>
-                <form onSubmit={handleFormSubmit}>
+                <form onSubmit={signupFormSubmit}>
                     <label>Username:</label>
                 <input type="text" ref={username}/>
                     <label>Password:</label>

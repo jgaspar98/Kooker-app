@@ -10,13 +10,11 @@ function SearchedRecipe({title,url,image, ingredients}) {
             <img src={image} alt="" />
             <ol>
                 {ingredients.map(ingredient => (
-                    <li>{ingredient.text}</li>
+                    <li> ) {ingredient.text}<br/></li>
                 ))}
             </ol>
         </div>
     );
 };
-
-
 
 export default SearchedRecipe
