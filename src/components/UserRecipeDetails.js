@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { deleteRecipe, getRecipe } from '../api';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import './UserRecipeDetails.css';
+import Button from 'react-bootstrap/Button'
 
 function UserRecipeDetails({match, history}){
     const [recipe, setRecipe] = React.useState({
@@ -31,25 +35,39 @@ function UserRecipeDetails({match, history}){
 
         return loaded ? (
             <>
-                <h1>{recipe.name}</h1>
-                <img src={recipe.imageUrl} alt='meal'/>
-                <p>Directions: {recipe.directions}</p>
+                <Nav className="justify-content-center" activeKey="/home">
+                <Navbar.Brand  href="/">
+                    <img
+                        src="/kooker_logo.png"
+                        width="100"
+                        height="100"
+                        alt="React Bootstrap logo"
+                        />
+                </Navbar.Brand>
+                <Nav.Item>
+                <Nav.Link href='/user/profile'>My Recipes</Nav.Link>
+                </Nav.Item>
+                </Nav>
+                <div className='info'>
+                <h1 className='title'>{recipe.name}</h1>
+                <img className='image' src={recipe.imageUrl} alt='meal'/>
+                <p><strong>Directions:</strong> {recipe.directions}</p>
                 <strong>Ingredients: </strong>
-                <ul>
+                <ol className='ingredients'>
                     {recipe.ingredients.map((ingredient, index) => {
-                            return (
+                        return (
                                 <li key={index}>
                                     {ingredient}
                                 </li>
                             )
                         })
                     }
-                </ul>
-                <p>Notes: {recipe.notes}</p>
-                <p>Preparation Time: {recipe.preparation_time}</p>
-                <p>Cook Time: {recipe.cook_time}</p>
-                <button onClick={() =>{history.push(`/recipes/${recipe._id}/edit`)}}>Edit Project</button>
-                <Link to='/user/profile'>Back</Link>
+                </ol>
+                <p><strong>Notes: </strong> {recipe.notes}</p>
+                <p><strong>Preparation Time: </strong> {recipe.preparation_time}</p>
+                <p><strong>Cook Time: </strong>{recipe.cook_time}</p>
+                    <Button onClick={() => { history.push(`/recipes/${recipe._id}/edit`) }}>Edit Project</Button>
+                </div>
             </>
         ) : 
             <p>Loading</p>

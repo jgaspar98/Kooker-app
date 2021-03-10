@@ -7,7 +7,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import './UserRecipes.css';
 
-function UserRecipes() {
+function UserRecipes({loggedInUser}) {
     const [userRecipes, setUserRecipes] = React.useState([]);
 
     React.useEffect(() => {
@@ -37,12 +37,12 @@ function UserRecipes() {
                         />
                 </Navbar.Brand>
                 <Nav.Item>
-                <Nav.Link href='/recipe/create'>Add Recipe</Nav.Link>
+                <Nav.Link href='/recipe/create'>Create Recipe</Nav.Link>
                 </Nav.Item>
             </Nav>
             <h1 className='title'>User created recipes</h1>
             <div className='recipe' >
-            <ul>
+            <ul className='recipes'>
                 {userRecipes.map((recipe) => {
                     return (
                         <li key={recipe._id}>

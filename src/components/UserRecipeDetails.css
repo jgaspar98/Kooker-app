@@ -1,0 +1,19 @@
+.info{
+    padding: 1rem;
+    text-align: center;
+    background-color: rgb(80, 220, 213 , 0.5);
+    width: 37rem;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 25px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.ingredients{
+    width: 10rem;
+    align-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
