@@ -1,0 +1,18 @@
+.btn{
+    margin:1rem
+}
+
+.api-img{
+    vertical-align: middle;
+    border-style: none;
+    border-radius: 73px;
+    border: solid;
+}
+
+.ingredients-api{
+    width: 29rem;
+    margin: 1rem;
+    background-color: #ffffff85;
+    border-radius: 25px;
+    padding: 2rem;
+}

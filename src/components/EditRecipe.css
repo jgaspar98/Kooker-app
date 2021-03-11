@@ -1,0 +1,44 @@
+.edit-form{
+    padding: 1rem;
+    text-align: center;
+    background-color: rgb(80, 220, 213 , 0.5);
+    width: 37rem;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 25px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+
+form {
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+label,
+input {
+/* In order to define widths */
+display: inline-block;
+}
+
+label {
+width: 30%;
+/* Positions the label text beside the input */
+text-align: right;
+}
+
+label+input {
+width: 30%;
+/* Large margin-right to force the next element to the new-line
+            and margin-left to create a gutter between the label and input */
+margin: 0 30% 0 4%;
+}
+
+
+/* Only the submit button is matched by this selector,
+        but to be sure you could use an id or class for that button */
+
+input+input {
+float: right;
+}

@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react'
+import React,{useEffect, useState, useRef} from 'react'
 import axios from 'axios';
 import SearchedRecipe from './SearchedRecipe';
 import './RecipeSearch.css';
@@ -9,25 +9,30 @@ function RecipeSearch() {
     const APP_KEY = process.env.REACT_APP_API_EDAMAN_KEY;
     const [recipes, setRecipes] = useState([]);
     const [search, setSearch] = useState('');
-    const [query,setQuery] = useState('chicken')
-
+    const [query, setQuery] = useState('chicken')
+    const isMountedRef = useRef(null);
     useEffect(() => {
+        isMountedRef.current = true;
         axios.get(`https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`)
             .then((response) => {
-                setRecipes(response.data.hits);
-                console.log(response.data);
-                
+                if (isMountedRef.current) {
+                    setRecipes(response.data.hits);
+                }
             }).catch(err => console.log(err));
-    }, [query]);
+        
+            return () => isMountedRef.current = false;
+    }, [query, APP_ID, APP_KEY]);
+
 
     const handleChange = (event) => {
         setSearch(event.target.value)
+
     };
 
     const handleSearch = (event) => {
         event.preventDefault();
         setQuery(search);
-        setSearch('');
+       
     }
 
     return (

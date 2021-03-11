@@ -30,9 +30,40 @@ Body{
   float:left;
   height: 900px;
   overflow:scroll;
+  overflow-x: hidden;
 }
 
 .logo{
  float: right;
  margin-top: 5rem;
+ overflow-y: auto;
 }
+
+.search::-webkit-scrollbar {
+  width: 12px;               /* width of the entire scrollbar */
+}
+
+.search::-webkit-scrollbar-track {
+  background: rgba(223, 222, 221, 0.103);        /* color of the tracking area */
+}
+
+.search::-webkit-scrollbar-thumb {
+  background-color: rgb(0, 247, 255, 0.3);    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid rgb(215, 211, 121);  /* creates padding around scroll thumb */
+}
+
+body::-webkit-scrollbar {
+  width: 15px;               /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: rgba(47, 47, 47, 0.507);        /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgba(130, 215, 218, 0.616);    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid rgba(87, 87, 85, 0.842);  /* creates padding around scroll thumb */
+}
+

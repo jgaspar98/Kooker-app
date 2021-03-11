@@ -1,5 +1,5 @@
 import React from 'react';
-import { deleteRecipe, getAllRecipes, getAllRecipesForUser } from '../api';
+import { deleteRecipe, getAllRecipesForUser } from '../api';
 import { toast } from 'react-toastify';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -7,7 +7,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import './UserRecipes.css';
 
-function UserRecipes({loggedInUser}) {
+function UserRecipes() {
     const [userRecipes, setUserRecipes] = React.useState([]);
 
     React.useEffect(() => {
@@ -36,9 +36,6 @@ function UserRecipes({loggedInUser}) {
                         alt="React Bootstrap logo"
                         />
                 </Navbar.Brand>
-                <Nav.Item>
-                <Nav.Link href='/recipe/create'>Create Recipe</Nav.Link>
-                </Nav.Item>
             </Nav>
             <h1 className='title'>User created recipes</h1>
             <div className='recipe' >

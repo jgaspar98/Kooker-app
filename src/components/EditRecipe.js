@@ -1,6 +1,11 @@
 import React from 'react';
 import { toast } from 'react-toastify';
 import { getRecipe, updateRecipe } from '../api';
+import './EditRecipe.css';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import Button from 'react-bootstrap/Button';
+
 
 function EditRecipe ({match, history}){
     const nameRef = React.useRef();
@@ -49,31 +54,56 @@ function EditRecipe ({match, history}){
         setImageUrl(event.target.files[0])
     }
 
+
     return (
-        <form onSubmit={handleFormSubmit}>
-            <label>Name</label>
-            <input type='text' ref={nameRef} />
+        <div>
+        <Nav className="justify-content-center" activeKey="/home">
+                <Navbar.Brand  href="/">
+                    <img
+                        src="/kooker_logo.png"
+                        width="100"
+                        height="100"
+                        alt="React Bootstrap logo"
+                        />
+                </Navbar.Brand>
+                <Nav.Item>
+                <Nav.Link href='/user/profile'>My Recipes</Nav.Link>
+                </Nav.Item>
+            </Nav>
+        <div className='edit-form'>
+             <form onSubmit={handleFormSubmit}>
+                <label className='label-edit'><strong>Name</strong></label>
+                <input type='text' ref={nameRef} />
+                <br/>
 
-            <label>Directions</label>
-            <input type='text' ref={directionsRef} />
+                <label className='label-edit'><strong>Directions</strong></label>
+                <input type='text' ref={directionsRef} />
+                <br/>
 
-            <label>Ingredients</label>
-            <input type='text' ref={ingredientsRef} />
+                <label className='label-edit'><strong>Ingredients</strong> <br/> (separate by ' , ')</label>
+                <input type='text' ref={ingredientsRef} />
+                <br/>
 
-            <label>notes</label>
-            <input type='text' ref={notesRef} />
+                <label className='label-edit'><strong>Notes</strong></label>
+                <input type='text' ref={notesRef} />
+                <br/>
 
-            <label>Preparation Time</label>
-            <input type='text' ref={preparation_timeRef} />
+                <label className='label-edit'><strong>Preparation Time</strong></label>
+                <input type='text' ref={preparation_timeRef} />
+                <br/>
 
-            <label>Cook Time</label>
-            <input type='text' ref={cook_timeRef} />
-            
-            <label>Image</label>
-            <input type='file' onChange={handleFileChange} />
-            
-            <button type='submit'>Update</button>
-        </form>
+                <label className='label-edit'><strong>Cook Time</strong></label>
+                <input type='text' ref={cook_timeRef} />
+                <br/>
+                
+                <label className='label-edit'><strong>Image</strong></label>
+                <input type='file' onChange={handleFileChange} />
+                <br/>
+                
+                <Button type='submit'>Update</Button>
+            </form>
+            </div>
+        </div>
     )
 
 }

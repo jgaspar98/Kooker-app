@@ -41,7 +41,7 @@ function App() {
       <Switch>
         <Route exact path='/' component={RecipeSearch} />
         <Route exact path='/user/profile' render={(props) => { return <UserProfile {...props} /> }} />
-        <Route exact path='/recipe/create' render={(props) => { return <AddRecipe {...props} loggedInUser={loggedInUser} /> }} />
+        {/* <Route exact path='/recipe/create' render={(props) => { return <AddRecipe {...props} loggedInUser={loggedInUser} /> }} /> */}
         <Route exact path='/recipes/:id' render={(props) => { return <UserRecipeDetails {...props} /> }} />
         <Route exact path='/recipes/:id/edit' component={EditRecipe} />
       </Switch>
@@ -57,8 +57,8 @@ function App() {
         <Route exact path='/' component={RecipeSearch} />
         </div>
       <Switch>
-      <Route exact path='/signup' render={(props) => { return <Signup {...props} setCurrentUser={setCurrentUser} /> }} />
-      <Route exact path='/login' render={(props) => { return <Login {...props} setCurrentUser={setCurrentUser} /> }} />
+      {/* <Route exact path='/signup' render={(props) => { return <Signup {...props} setCurrentUser={setCurrentUser} /> }} /> */}
+      {/* <Route exact path='/login' render={(props) => { return <Login {...props} setCurrentUser={setCurrentUser} /> }} /> */}
       <Route exact path='/login/google' render={
         () => {
           window.location.href = `${process.env.REACT_APP_PROJECTS_API}/api/auth/google`

@@ -1,6 +1,5 @@
 import React from 'react'
 import UserRecipes from './UserRecipes';
-import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { addRecipe, uploadFile } from '../api';
 import { toast } from 'react-toastify';

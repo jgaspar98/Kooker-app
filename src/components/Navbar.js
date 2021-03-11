@@ -5,7 +5,6 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { signup, login } from '../api';
 
@@ -54,23 +53,24 @@ function SuperNavbar({ loggedInUser, setCurrentUser, history}) {
     return loggedInUser ? (
         <div>
             <Nav className="justify-content-end" activeKey="/home">
-                <Navbar.Brand  href="/">
-                    <img
-                        src="/kooker_logo.png"
-                        width="100"
-                        height="100"
-                        alt="React Bootstrap logo"
-                        />
-                </Navbar.Brand>
-                <Nav.Item>
-                <Nav.Link onClick={logoutUser}>Logout</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                <Nav.Link href='/user/profile'>My Recipes</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                <Nav.Link href='/recipe/create'>Add Recipe</Nav.Link>
-                </Nav.Item>
+                
+                    <Navbar.Brand  href="/">
+                        <img
+                            src="/kooker_logo.png"
+                            width="100"
+                            height="100"
+                            alt="React Bootstrap logo"
+                            />
+                    </Navbar.Brand>
+                    <Nav.Item>
+                    <Nav.Link onClick={logoutUser}>Logout</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                    <Nav.Link href='/user/profile'>My Recipes</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                    <Nav.Link href='/recipe/create'>Add Recipe</Nav.Link>
+                    </Nav.Item>
             </Nav>
             <p className="Wellcome"> Welcome {loggedInUser.username} </p>
         </div>
