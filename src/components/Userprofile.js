@@ -41,8 +41,8 @@ function UserProfile({ loggedInUser, history }) {
             }
 
             addRecipe(newRecipe).then(() => {
-                toast.success('Recipe created!');
-                window.location.reload();
+              window.location.reload();
+              toast.success('Recipe created!');
             }).catch(err => console.log(err))
         })
     }
