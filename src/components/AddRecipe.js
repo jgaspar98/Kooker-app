@@ -18,6 +18,7 @@ function AddRecipe({ loggedInUser, history }) {
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
+        
         const uploadData = new FormData();
         uploadData.append('file', imageUrl);
 

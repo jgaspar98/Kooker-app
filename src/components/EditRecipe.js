@@ -1,6 +1,6 @@
 import React from 'react';
 import { toast } from 'react-toastify';
-import { getRecipe, updateRecipe } from '../api';
+import { getRecipe, updateRecipe, uploadFile } from '../api';
 import './EditRecipe.css';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -33,20 +33,32 @@ function EditRecipe ({match, history}){
     const handleFormSubmit = (event) => {
         event.preventDefault();
         const recipeId = match.params.id;
-        const newRecipe = {
-            id: recipeId,
-            imageUrl: imageUrl,
-            name: nameRef.current.value,
-            directions: directionsRef.current.value,
-            ingredients: ingredientsRef.current.value,
-            notes: notesRef.current.value,
-            preparation_time: preparation_timeRef.current.value,
-            cook_time: cook_timeRef.current.value
-        }
-        updateRecipe(newRecipe).then(() => {
-            toast.success('Recipe updated!')
-            history.push(`/recipes/${recipeId}`)
-        }).catch(err => console.log(err))
+
+        const uploadData = new FormData();
+        uploadData.append('file', imageUrl);
+
+        uploadFile(uploadData).then((response) => {
+
+            const newRecipe = {
+                id: recipeId,
+                imageUrl:response.data.fileUrl,
+                name: nameRef.current.value,
+                directions: directionsRef.current.value,
+                ingredients: ingredientsRef.current.value,
+                notes: notesRef.current.value,
+                preparation_time: preparation_timeRef.current.value,
+                cook_time: cook_timeRef.current.value
+            }
+            updateRecipe(newRecipe).then(() => {
+                toast.success('Recipe updated!')
+                history.push(`/recipes/${recipeId}`)
+            }).catch(err => console.log(err))
+
+
+        })
+
+
+       
     }
 
     const handleFileChange = (event) =>{
