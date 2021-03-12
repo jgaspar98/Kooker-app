@@ -68,9 +68,6 @@ function SuperNavbar({ loggedInUser, setCurrentUser, history}) {
                     <Nav.Item>
                     <Nav.Link href='/user/profile'>My Recipes</Nav.Link>
                     </Nav.Item>
-                    <Nav.Item>
-                    <Nav.Link href='/recipe/create'>Add Recipe</Nav.Link>
-                    </Nav.Item>
             </Nav>
             <p className="Wellcome"> Welcome {loggedInUser.username} </p>
         </div>

@@ -19,7 +19,6 @@ function EditRecipe ({match, history}){
     React.useEffect(() =>{
         const recipeId = match.params.id;
         getRecipe(recipeId).then((response) => {
-         //   idRef.current.value = response.data._id;
             nameRef.current.value = response.data.name;
             directionsRef.current.value = response.data.directions;
             setImageUrl(response.data.imageUrl);

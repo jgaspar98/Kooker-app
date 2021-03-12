@@ -12,13 +12,13 @@ function UserProfile({ loggedInUser, history }) {
     const notesRef = React.useRef();
     const preparation_timeRef = React.useRef();
     const cook_timeRef = React.useRef();
-  //  const [imageUrl, setImageUrl] = React.useState();
 
     const [modalShow, setModalShow] = React.useState(false);
-    let imageUrl = ''
+    let imageUrl = ''; // To add a new image has to be this way to be compatible with the Modal
+                        // If used setState, the page refresh and resets the form
+  
     const handleFileChange = (event) => {
         imageUrl = event.target.files[0];
-     //   setImageUrl()
     }
 
     const handleFormSubmit = (event) => {
@@ -29,7 +29,6 @@ function UserProfile({ loggedInUser, history }) {
         uploadFile(uploadData).then((response) => {
             
             const newRecipe = {
-                
                 name: nameRef.current.value,
                 directions: directionsRef.current.value,
                 ingredients: ingredientsRef.current.value,
